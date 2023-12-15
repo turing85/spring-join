@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.*;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@DisplayName("Contoller Tests")
+@DisplayName("Controller Tests")
 @Sql({ "/data.sql" })
 class ControllerTest {
 
@@ -36,9 +36,7 @@ class ControllerTest {
         .then().assertThat()
             .statusCode(HttpStatus.OK.value())
             .body("size()", is(3))
-            .body("find { it.id == 0 }", is(notNullValue()))
-            .body("find { it.id == 1 }", is(notNullValue()))
-            .body("find { it.id == 2 }", is(notNullValue()));
+            .body("collect { it.id }", hasItems(0, 1, 2));
     // @formatter: on
   }
 
@@ -51,8 +49,7 @@ class ControllerTest {
         .then().assertThat()
             .statusCode(HttpStatus.OK.value())
             .body("size()", is(2))
-            .body("find { it.id == 0 }", is(notNullValue()))
-            .body("find { it.id == 1 }", is(notNullValue()));
+            .body("collect { it.id }", hasItems(0, 1));
     // @formatter: on
   }
 }
