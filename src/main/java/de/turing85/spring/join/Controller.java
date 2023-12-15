@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("as")
+@RequestMapping(Controller.PATH)
 @RequiredArgsConstructor
 public class Controller {
+  public static final String PATH = "as";
   private final ARepository repository;
 
   @GetMapping
