@@ -17,14 +17,14 @@ import static org.hamcrest.Matchers.is;
 public class ControllerActor {
   private final int port;
 
+  private Response response;
+
   public ControllerActor(
       @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
       @LocalServerPort
       int port) {
     this.port = port;
   }
-
-  private Response response;
 
   public void get(String path) {
     response = RestAssured.when().get("http://localhost:%d/%s".formatted(port, path));
